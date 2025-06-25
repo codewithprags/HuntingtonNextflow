@@ -13,18 +13,29 @@ echo 'NXF_OPTS="-Xms1g -Xmx4g"' >> ~/.bashrc
 
 # Source .bashrc to apply changes
 source ~/.bashrc
+###Fetching the Frefernce Genome Fasta and FASTQ files### Not really sure if this is the correct file to use
 
-
-# ================================ ? ================================
+# ================================ Fetching the FASTA and FASTQ files ================================
 ./nextflow run nf-core/rnaseq \
---input ~/scratch/lab_2/fetchngs/samplesheet/samplesheet.csv \
---outdir ~/scratch/lab_2/index_run \
---fasta ~/labs/lab_2/reference_genome/dmel/Drosophila_melanogaster.BDGP6.46.dna_sm.toplevel.fa.gz \
---gtf ~/labs/lab_2/reference_genome/dmel/Drosophila_melanogaster.BDGP6.46.113.gtf.gz \
+--input ~/HuntingtonNextflow/Data/sampleids.xlsx \
+--outdir ~/HuntingtonNextflow/Data/fetchngs \
+--max_cpus 32 --max_memory 128.GB \
+--download_method sratools \
+--nf_core_pipeline rnaseq \
+-w ~/HuntingtonNextflow/Data/fetchngs \
+-profile docker
+
+##Prepaing The RNA Seq Pipeline##
+# ================================ Indexing the reference genome ================================
+./nextflow run nf-core/rnaseq \
+--input ~/HuntingtonNextflow/Data/samplesheet.csv \
+--outdir ~/HuntingtonNextflow/Data/index_run \
+--fasta ["path to Human HTT refernce geneome,.fa.gz file type"] \
+--gtf ["path to Human HTT refernce geneome,.gtf.gz file type"] \
 --skip_alignment --skip_pseudo_alignment \
 --trimmer fastp \
 --save_reference true \
--w ~/scratch/work/lab_2/index_run \
+-w ~/HuntingtonNextflow/Data/index_run \
 -profile docker
 # Or
 ./nextflow run nf-core/rnaseq \

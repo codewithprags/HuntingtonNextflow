@@ -13,7 +13,10 @@ echo 'NXF_OPTS="-Xms1g -Xmx4g"' >> ~/.bashrc
 
 # Source .bashrc to apply changes
 source ~/.bashrc
-###Fetching the Frefernce Genome Fasta and FASTQ files### Not really sure if this is the correct file to use
+
+###Fetching the Refernce Genome Fasta and FASTQ files### Not really sure if this is the correct file to use
+###Manually downloaded the sraruntable.txt file from the NCBI SRA website for the Huntington's disease RNA seq data
+##created a sampleids.xlsx file with the sample IDs 
 
 # ================================ Fetching the FASTA and FASTQ files ================================
 ./nextflow run nf-core/rnaseq \
@@ -39,17 +42,17 @@ source ~/.bashrc
 -profile docker
 # Or
 ./nextflow run nf-core/rnaseq \
---input ~/scratch/lab_2/fetchngs/samplesheet/samplesheet.csv \
---outdir ~/scratch/lab_2/alignment_run \
---fasta ~/labs/lab_2/reference_genome/dmel/Drosophila_melanogaster.BDGP6.46.dna_sm.toplevel.fa.gz \
---gtf ~/labs/lab_2/reference_genome/dmel/Drosophila_melanogaster.BDGP6.46.113.gtf.gz \
---salmon_index "/home/user/scratch/lab_2/index_run/genome/index/salmon" \
+--input ~/HuntingtonNextflow/Data/fetchngs/samplesheet/samplesheet.csv \
+--outdir ~/HuntingtonNextflow/Data/alignment_run \
+--fasta ["path to Human HTT refernce geneome,.fa.gz file type"] \
+--gtf ["path to Human HTT refernce geneome,.gtf.gz file type"] \
+--salmon_index "/HuntingtonNextflow/Data/index_run genome/index/salmon" \
 --trimmer fastp \
 --aligner hisat2 \
 --pseudo_aligner salmon \
 --extra_salmon_quant_args "--gcBias --seqBias" \
 --deseq2_vst true \
--w ~/scratch/work/lab_2/alignment_run \
+-w ~/HuntingtonNextflow/Data/alignment_run \
 -profile docker
 
 

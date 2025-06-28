@@ -20,6 +20,7 @@ source ~/.bashrc
 
 # ================================ Fetching the FASTA and FASTQ files ================================
 ./nextflow run nf-core/rnaseq \
+# based on lab, shouldnt this be nf-core/fetchngs  ?
 --input ~/HuntingtonNextflow/Data/sampleids.xlsx \
 --outdir ~/HuntingtonNextflow/Data/fetchngs \
 --max_cpus 32 --max_memory 128.GB \
@@ -29,9 +30,10 @@ source ~/.bashrc
 -profile docker
 
 ##Prepaing The RNA Seq Pipeline##
-# ================================ Indexing the reference genome ================================
+# ================================ Indexing the reference genome (no alignment) ================================
 ./nextflow run nf-core/rnaseq \
 --input ~/HuntingtonNextflow/Data/samplesheet.csv \
+# is the input samplesheet from the previous pipe's output?  Data/fetchngs/samplesheet/samplesheet.csv  ?
 --outdir ~/HuntingtonNextflow/Data/index_run \
 --fasta ["path to Human HTT refernce geneome,.fa.gz file type"] \
 --gtf ["path to Human HTT refernce geneome,.gtf.gz file type"] \
@@ -40,13 +42,18 @@ source ~/.bashrc
 --save_reference true \
 -w ~/HuntingtonNextflow/Data/index_run \
 -profile docker
-# Or
+# =========================== 2. Align the reads (what aligner did the authors use?)
+# sequencing instrument model + platform --> based on info, do we need to trim adapters? 
+
+## hisat2, in this pipeline, doesnt actually quantify gene expression --> cant get deseq2 similarity plot. we used it bc star align was our of commission
+# DESeq2 = tool to quantify gene expression ; PC plot gives profile 
+
 ./nextflow run nf-core/rnaseq \
 --input ~/HuntingtonNextflow/Data/fetchngs/samplesheet/samplesheet.csv \
 --outdir ~/HuntingtonNextflow/Data/alignment_run \
 --fasta ["path to Human HTT refernce geneome,.fa.gz file type"] \
 --gtf ["path to Human HTT refernce geneome,.gtf.gz file type"] \
---salmon_index "/HuntingtonNextflow/Data/index_run genome/index/salmon" \
+--salmon_index "/HuntingtonNextflow/Data/index_run/genome/index/salmon" \
 --trimmer fastp \
 --aligner hisat2 \
 --pseudo_aligner salmon \
@@ -54,7 +61,20 @@ source ~/.bashrc
 --deseq2_vst true \
 -w ~/HuntingtonNextflow/Data/alignment_run \
 -profile docker
-
+# // OR //
+./nextflow run nf-core/rnaseq \
+--input ~/HuntingtonNextflow/Data/fetchngs/samplesheet/samplesheet.csv \
+--outdir ~/HuntingtonNextflow/Data/alignment_run \
+--fasta ["path to Human HTT refernce geneome,.fa.gz file type"] \
+--gtf ["path to Human HTT refernce geneome,.gtf.gz file type"] \
+--rsem_index "/HuntingtonNextflow/Data/index_run/genome/rsem" \
+--salmon_index "/HuntingtonNextflow/Data/index_run/genome/index/salmon" \
+--trimmer fastp \
+--pseudo_aligner salmon \
+--extra_salmon_quant_args "--gcBias --seqBias" \
+--deseq2_vst true \
+-w ~/HuntingtonNextflow/Data/alignment_run \
+-profile docker
 
 # ================================ DEA ================================
 ./nextflow run nf-core/differentialabundance \

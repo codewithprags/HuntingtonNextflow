@@ -19,8 +19,9 @@ source ~/.bashrc
 ##created a sampleids.xlsx file with the sample IDs 
 
 # ================================ Fetching the FASTA and FASTQ files ================================
-./nextflow run nf-core/rnaseq \
+# ./nextflow run nf-core/rnaseq \
 # based on lab, shouldnt this be nf-core/fetchngs  ?
+./nextflow run nf-core/fetchngs \
 --input ~/HuntingtonNextflow/Data/sampleids.xlsx \
 --outdir ~/HuntingtonNextflow/Data/fetchngs \
 --max_cpus 32 --max_memory 128.GB \
@@ -32,11 +33,12 @@ source ~/.bashrc
 ##Prepaing The RNA Seq Pipeline##
 # ================================ Indexing the reference genome (no alignment) ================================
 ./nextflow run nf-core/rnaseq \
---input ~/HuntingtonNextflow/Data/samplesheet.csv \
+# --input ~/HuntingtonNextflow/Data/samplesheet.csv \
 # is the input samplesheet from the previous pipe's output?  Data/fetchngs/samplesheet/samplesheet.csv  ?
+--input ~/HuntingtonNextflow/Data/fetchngs/samplesheet/samplesheet.csv \
 --outdir ~/HuntingtonNextflow/Data/index_run \
---fasta ["path to Human HTT refernce geneome,.fa.gz file type"] \
---gtf ["path to Human HTT refernce geneome,.gtf.gz file type"] \
+--fasta "Reference_genome_DNAchr4.fa.gz" \
+--gtf "Reference_genome.gtf.gz" \  # ["path to Human HTT refernce geneome,.gtf.gz file type"] \
 --skip_alignment --skip_pseudo_alignment \
 --trimmer fastp \
 --save_reference true \
@@ -52,8 +54,8 @@ source ~/.bashrc
 ./nextflow run nf-core/rnaseq \
 --input ~/HuntingtonNextflow/Data/fetchngs/samplesheet/samplesheet.csv \
 --outdir ~/HuntingtonNextflow/Data/alignment_run \
---fasta ["path to Human HTT refernce geneome,.fa.gz file type"] \
---gtf ["path to Human HTT refernce geneome,.gtf.gz file type"] \
+--fasta "Reference_genome_DNAchr4.fa.gz" \
+--gtf "Reference_genome.gtf.gz" \ 
 --rsem_index "/HuntingtonNextflow/Data/index_run/genome/rsem" \
 --salmon_index "/HuntingtonNextflow/Data/index_run/genome/index/salmon" \
 --trimmer fastp \
@@ -68,8 +70,8 @@ source ~/.bashrc
 ./nextflow run nf-core/rnaseq \
 --input ~/HuntingtonNextflow/Data/fetchngs/samplesheet/samplesheet.csv \
 --outdir ~/HuntingtonNextflow/Data/alignment_run \
---fasta ["path to Human HTT refernce geneome,.fa.gz file type"] \
---gtf ["path to Human HTT refernce geneome,.gtf.gz file type"] \
+--fasta "Reference_genome_DNAchr4.fa.gz" \
+--gtf "Reference_genome.gtf.gz" \ 
 --salmon_index "/HuntingtonNextflow/Data/index_run/genome/index/salmon" \
 --trimmer fastp \
 --aligner hisat2 \

@@ -26,7 +26,11 @@ print(df)
 # Contrasts
 # id,variable,reference,target,blocking
 # condition_control_treated,condition,control,treated,
-# condition_control_treated_blockrep,condition,control,treated,replicate;batch
+
+# Control (IC1): nH105IC1, nH105IC2, nH105IC3, nH105IC4
+# Huntington's Disease (HD/ND4222): nH222HD1, nH222HD2, nH222HD3, nH222HD4
+# HTT knock out (HTT-KO): nH37KO1, nH37KO2, nH37KO3
+# idk where to relate these ^^ to sra bc sra doenst use these IDs specifically 
 
 contrasts = pd.DataFrame()
 contrasts['id'] = ''

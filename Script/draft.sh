@@ -37,8 +37,8 @@ source ~/.bashrc
 # is the input samplesheet from the previous pipe's output?  Data/fetchngs/samplesheet/samplesheet.csv  ?
 --input ~/HuntingtonNextflow/Data/fetchngs/samplesheet/samplesheet.csv \
 --outdir ~/HuntingtonNextflow/Data/index_run \
---fasta "Reference_genome_DNAchr4.fa.gz" \
---gtf "Reference_genome.gtf.gz" \  # ["path to Human HTT refernce geneome,.gtf.gz file type"] \
+--fasta "~/HuntingtonNextflow/Data/Reference_genome_DNAchr4.fa.gz" \
+--gtf "~/HuntingtonNextflow/Data/Reference_genome.gtf.gz" \  # ["path to Human HTT refernce geneome,.gtf.gz file type"] \
 --skip_alignment --skip_pseudo_alignment \
 --trimmer fastp \
 --save_reference true \
@@ -70,9 +70,9 @@ source ~/.bashrc
 ./nextflow run nf-core/rnaseq \
 --input ~/HuntingtonNextflow/Data/fetchngs/samplesheet/samplesheet.csv \
 --outdir ~/HuntingtonNextflow/Data/alignment_run \
---fasta "Reference_genome_DNAchr4.fa.gz" \
---gtf "Reference_genome.gtf.gz" \ 
---salmon_index "/HuntingtonNextflow/Data/index_run/genome/index/salmon" \
+--fasta "~/HuntingtonNextflow/Data/Reference_genome_DNAchr4.fa.gz" \
+--gtf "~/HuntingtonNextflow/Data/Reference_genome.gtf.gz" \ 
+--salmon_index "~/HuntingtonNextflow/Data/index_run/genome/index/salmon" \
 --trimmer fastp \
 --aligner hisat2 \
 --pseudo_aligner salmon \

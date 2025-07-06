@@ -53,8 +53,8 @@ contrasts = pd.DataFrame({
 print(contrasts)
 
 # Save the DataFrame to a CSV file
-df.to_csv("./Data/differentialabundance/metadata.tsv", sep='\t', index=False)
-contrasts.to_csv("./Data/differentialabundance/contrasts.tsv", sep='\t',index=False)
+df.to_csv("./Data/differentialabundance/metadata.csv", index=False)
+contrasts.to_csv("./Data/differentialabundance/contrasts.csv", index=False)
 
 
 # Make transcript lengths DataFrame
@@ -84,4 +84,4 @@ for _, row in transcript_lengths_raw.iterrows():
 transcript_lengths = pd.DataFrame(expanded_rows, columns=["transcript_id", "transcript_length"])
 
 print(transcript_lengths.head())
-transcript_lengths.to_csv("./Data/differentialabundance/transcript_length.tsv", sep='\t', index=False)
+transcript_lengths.to_csv("./Data/differentialabundance/transcript_length.csv",  index=False)

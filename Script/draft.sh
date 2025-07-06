@@ -30,6 +30,22 @@ source ~/.bashrc
 -w ~/HuntingtonNextflow/Data/fetchngs \
 -profile docker
 
+# Output is likely this: 
+# fetchngs/
+# ├── samplesheet/
+# │   └── samplesheet.csv
+# ├── <sample_id_1>/
+# │   ├── <sample_id_1>_1.fastq.gz
+# │   └── <sample_id_1>_2.fastq.gz
+# ├── <sample_id_2>/
+# │   ├── <sample_id_2>_1.fastq.gz
+# │   └── <sample_id_2>_2.fastq.gz
+# └── work/
+#     └── ... (intermediate files)
+# It's documented here: https://github.com/nf-core/fetchngs
+# but I used chatGPT to visualize the output structure since I don't have access to lab2 server - Nguyen.
+
+
 ##Prepaing The RNA Seq Pipeline##
 # ================================ Indexing the reference genome (no alignment) ================================
 ./nextflow run nf-core/rnaseq \
@@ -44,7 +60,11 @@ source ~/.bashrc
 --save_reference true \
 -w ~/HuntingtonNextflow/Data/index_run \
 -profile docker
-# =========================== 2. Align the reads (what aligner did the authors use?)
+
+
+
+
+# =========================== 2. Align the reads (what aligner did the authors use?) ================================
 # sequencing instrument model + platform --> based on info, do we need to trim adapters? 
 
 ## hisat2, in this pipeline, doesnt actually quantify gene expression --> cant get deseq2 similarity plot. we used it bc star align was our of commission
@@ -91,29 +111,40 @@ source ~/.bashrc
 
 # DESeq2 + GSEA, gProfiler2, and Shiny App
 ./nextflow run nf-core/differentialabundance \
---input ~/HuntingtonNextflow/Data/differentialabundance/metadata.tsv \
---contrasts ~/HuntingtonNextflow/Data/differentialabundance/contrasts.tsv \
+--input ~/HuntingtonNextflow/Data/differentialabundance/metadata.csv \
+--contrasts ~/HuntingtonNextflow/Data/differentialabundance/contrasts.csv \
 --matrix ~/HuntingtonNextflow/Data/NCBI_DATA/GSE270472_raw_counts_GRCh38.p13_NCBI.tsv.gz \
---transcript_length_matrix ~/HuntingtonNextflow/Data/differentialabundance/transcript_length.tsv \
+--transcript_length_matrix ~/HuntingtonNextflow/Data/differentialabundance/transcript_length.csv \
 --gtf ~/HuntingtonNextflow/Data/Reference_genome.gtf.gz \
---filtering_min_proportion 0.3 \        # Filter out genes that are not expressed in at least 30% of samples => prevent noise from genes that are rarely expressed
---filtering_grouping_var condition \    # Contrast variable (condition, or interaction, ..., whichever we specified in the contrast file??)
+--filtering_min_proportion 0.3 \        
+--filtering_grouping_var condition \    
 --deseq2_cores 4 \
 --gsea_run true \
---gsea_permute gene_set \               # Use gene set permutation since we have less than 7 samples per group (we only have 3-4)
---gene_sets_files ["two file paths"]    # Gene symbol files? From MSigDB??
+--gsea_permute gene_set \               
+--gene_sets_files ["two file paths"]   
 --gprofiler2_run true \
---gprofiler2_organism ["organism"] \    # Specify that we're using human genes 
---gprofiler2_sources ["string"] \       # Select specific gene set database (GO, KEGG, REAC...)
---gprofiler2_correction_method gSCS \   # Default for gProfiler, for small gene sets
+--gprofiler2_organism hsapiens \    
+--gprofiler2_sources '["GO", "KEGG", "REAC"]' \      
+--gprofiler2_correction_method gSCS \   
 --shinyngs_build_app true \
 --max_cpus 8 --max_memory 8.GB \
 --outdir ~/scratch/lab_3/dge_analysis_filtered \
 -w ~/scratch/work/lab_3/dge_analysis \
--profile docker # Which package + environmental manager to run the analysis in. We used Docker in the lab.
+-profile docker 
+
+# NOTE
+# Filter out genes that are not expressed in at least 30% of samples => prevent noise from genes that are rarely expressed
+# Contrast variable (condition, or interaction, ..., whichever we specified in the contrast file??)
+# Use gene set permutation since we have less than 7 samples per group (we only have 3-4)
+# Gene symbol files? From MSigDB??
+# Specify that we're using human genes 
+# Select specific gene set database (GO, KEGG, REAC...)
+# Default for gProfiler, for small gene sets
+# Which package + environmental manager to run the analysis in. We used Docker in the lab.
 
 
-# # Additional
+
+# ================================ Additional ================================
 # # Basic DESeq2 + filtering
 # ./nextflow run nf-core/differentialabundance \
 # --input ["file_path"] \

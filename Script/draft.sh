@@ -22,7 +22,7 @@ source ~/.bashrc
 # ./nextflow run nf-core/rnaseq \
 # based on lab, shouldnt this be nf-core/fetchngs  ?
 ./nextflow run nf-core/fetchngs \
---input ~/HuntingtonNextflow/Data/sampleids.xlsx \
+--input ~/HuntingtonNextflow/Data/sampleids.csv \  # Use .csv instead of .xlsx. Also column name should be "sample"?
 --outdir ~/HuntingtonNextflow/Data/fetchngs \
 --max_cpus 32 --max_memory 128.GB \
 --download_method sratools \
@@ -34,7 +34,7 @@ source ~/.bashrc
 # ================================ Indexing the reference genome (no alignment) ================================
 ./nextflow run nf-core/rnaseq \
 # --input ~/HuntingtonNextflow/Data/samplesheet.csv \
-# is the input samplesheet from the previous pipe's output?  Data/fetchngs/samplesheet/samplesheet.csv  ?
+# is the input samplesheet from the previous pipe's output?  Data/fetchngs/samplesheet/samplesheet.csv  ?   YES
 --input ~/HuntingtonNextflow/Data/fetchngs/samplesheet/samplesheet.csv \
 --outdir ~/HuntingtonNextflow/Data/index_run \
 --fasta "~/HuntingtonNextflow/Data/Reference_genome_DNAchr4.fa.gz" \
@@ -91,11 +91,11 @@ source ~/.bashrc
 
 # DESeq2 + GSEA, gProfiler2, and Shiny App
 ./nextflow run nf-core/differentialabundance \
---input ["file_path to meta data .tsv file"] \
---contrasts ["file_path to contrast .tsv or .csv? file prodicing instructions on which group comparisons to perform"] \
---matrix ["file_path to raw count matrix"] \
---transcript_length_matrix ["file_path to transcript length matrix"] \
---gtf ["file_path to gene annotation file (GRCh38.p13 files)"] \
+--input ~/HuntingtonNextflow/Data/differentialabundance/metadata.tsv \
+--contrasts ~/HuntingtonNextflow/Data/differentialabundance/contrasts.tsv \
+--matrix ~/HuntingtonNextflow/Data/NCBI_DATA/GSE270472_raw_counts_GRCh38.p13_NCBI.tsv.gz \
+--transcript_length_matrix ~/HuntingtonNextflow/Data/differentialabundance/transcript_length.tsv \
+--gtf ~/HuntingtonNextflow/Data/Reference_genome.gtf.gz \
 --filtering_min_proportion 0.3 \        # Filter out genes that are not expressed in at least 30% of samples => prevent noise from genes that are rarely expressed
 --filtering_grouping_var condition \    # Contrast variable (condition, or interaction, ..., whichever we specified in the contrast file??)
 --deseq2_cores 4 \
@@ -110,40 +110,40 @@ source ~/.bashrc
 --max_cpus 8 --max_memory 8.GB \
 --outdir ~/scratch/lab_3/dge_analysis_filtered \
 -w ~/scratch/work/lab_3/dge_analysis \
--profile [what profiles do we use here] # Which package + environmental manager to run the analysis in. We used Docker in the lab.
+-profile docker # Which package + environmental manager to run the analysis in. We used Docker in the lab.
 
 
-# Additional
-# Basic DESeq2 + filtering
-./nextflow run nf-core/differentialabundance \
---input ["file_path"] \
---contrasts ["file_path"] \
---matrix ["file_path"] \
---transcript_length_matrix ["file_path"] \
---gtf ["file_path"] \
---deseq2_cores 4 \
---filtering_min_proportion 0.3 \
---filtering_grouping_var condition \
---max_cpus 8 --max_memory 8.GB \
---outdir ~/scratch/lab_3/dge_analysis_filtered \
--w ~/scratch/work/lab_3/dge_analysis \
--profile [what profiles do we use here]
+# # Additional
+# # Basic DESeq2 + filtering
+# ./nextflow run nf-core/differentialabundance \
+# --input ["file_path"] \
+# --contrasts ["file_path"] \
+# --matrix ["file_path"] \
+# --transcript_length_matrix ["file_path"] \
+# --gtf ["file_path"] \
+# --deseq2_cores 4 \
+# --filtering_min_proportion 0.3 \
+# --filtering_grouping_var condition \
+# --max_cpus 8 --max_memory 8.GB \
+# --outdir ~/scratch/lab_3/dge_analysis_filtered \
+# -w ~/scratch/work/lab_3/dge_analysis \
+# -profile [what profiles do we use here]
 
-# DESeq2 + GSEA
-./nextflow run nf-core/differentialabundance \
---input [file_path] \
---contrasts [file_path] \
---matrix [file_path] \
---transcript_length_matrix [file_path] \
---gtf [file_path] \
---filtering_min_proportion 0.3 \
---filtering_grouping_var condition \
---deseq2_cores 4 \
---gsea_run true \
---gsea_permute [option for small samples] \
---gene_sets_files [two file paths] \
---max_cpus 8 --max_memory 8.GB \
---outdir ~/scratch/lab_3/dge_analysis_filtered \
--w ~/scratch/work/lab_3/dge_analysis \
--profile [what profiles do we use here]
+# # DESeq2 + GSEA
+# ./nextflow run nf-core/differentialabundance \
+# --input [file_path] \
+# --contrasts [file_path] \
+# --matrix [file_path] \
+# --transcript_length_matrix [file_path] \
+# --gtf [file_path] \
+# --filtering_min_proportion 0.3 \
+# --filtering_grouping_var condition \
+# --deseq2_cores 4 \
+# --gsea_run true \
+# --gsea_permute [option for small samples] \
+# --gene_sets_files [two file paths] \
+# --max_cpus 8 --max_memory 8.GB \
+# --outdir ~/scratch/lab_3/dge_analysis_filtered \
+# -w ~/scratch/work/lab_3/dge_analysis \
+# -profile [what profiles do we use here]
 

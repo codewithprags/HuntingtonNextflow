@@ -1,0 +1,12 @@
+sample	fastq_1	fastq_2	genotype	condition	interaction	treatment	replicate
+SRR29493478			HTT-KO	mutant		Differentiation from iPSC to NSC	1
+SRR29493479			HTT-KO	mutant		Differentiation from iPSC to NSC	2
+SRR29493480			HTT-KO	mutant		Differentiation from iPSC to NSC	3
+SRR29493481			HTT-KO	mutant		Differentiation from iPSC to NSC	4
+SRR29493482			HTT mutation\, 109CAG	mutant		Differentiation from iPSC to NSC	1
+SRR29493483			HTT mutation\, 109CAG	mutant		Differentiation from iPSC to NSC	2
+SRR29493484			HTT mutation\, 109CAG	mutant		Differentiation from iPSC to NSC	3
+SRR29493485			HTT mutation\, 109CAG	mutant		Differentiation from iPSC to NSC	4
+SRR29493486			control	control		Differentiation from iPSC to NSC	1
+SRR29493487			control	control		Differentiation from iPSC to NSC	2
+SRR29493488			control	control		Differentiation from iPSC to NSC	3

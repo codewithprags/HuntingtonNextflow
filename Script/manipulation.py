@@ -4,24 +4,25 @@ import numpy as np
 
 # New Spreadsheet
 sra=pd.read_csv("./Data/SraRunTable.csv")
+samplesh= pd.DataFrame(pd.read_csv("./Data/samplesheet.csv"))
 print(sra.head())
-
 df = pd.DataFrame()
 # cols sample,fastq_1,fastq_2,condition,time,interaction,replicate
 # HD == huntington disease, HTT = huntingtin gene//protein
 # 4 KO, 4 HD, 3 control 
 df['sample'] = sra[["Run"]]
-df["fastq_1"] = ''
-df["fastq_2"] = ''  
-df["genotype"]= sra[["genotype"]]
+df["fastq_1"] = samplesh[['fastq_1']]
+df["fastq_2"] = samplesh[['fastq_2']]
+df["treatment"]= sra[["genotype"]] # changed colname to 'treatment' 
 df['condition'] = 'control'
-locations = np.where(df['genotype'] != 'control')
+locations = np.where(df['treatment'] != 'control')
 df["condition"][locations] = 'mutant' 
-df['interaction'] = ''
-df["treatment"] = sra[["treatment"]]
+# df['interaction'] = sra['cell_line']+'_'+sra['genotype'].astype(str)
+# df["treatment"] = sra[["treatment"]]
 df['replicate'] = ('1', '2', '3', '4', '1', '2', '3', '4', '1', '2', '3')
 
-print(df)
+print(df.head())
+df.to_csv('./Data/differentialabundance/metadata2.csv', index=False)
 
 # Contrasts
 # id,variable,reference,target,blocking

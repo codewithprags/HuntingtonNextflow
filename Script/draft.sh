@@ -109,6 +109,21 @@ source ~/.bashrc
 # - Contrast file
 # - Transcript length matrix
 
+# LAST PIPELINE I WAS WORKING WITH
+./nextflow run nf-core/differentialabundance \
+--input ./Data/differentialabundance/metadata2.csv \
+--contrasts ./Data/differentialabundance/contrasts.csv \
+--matrix ./Data/differentialabundance/salmon.merged.gene_counts.fixed.tsv \
+--transcript_length_matrix ./Data/differentialabundance/salmon.merged.gene_lengths.tsv \
+--gtf ./Data/Reference_genome.gtf.gz \ 
+# change to Reference_genome.fixed.gtf.gz
+--deseq2_cores 4 \
+--max_cpus 8 --max_memory 8.GB \
+--outdir ~/scratch/case_study/dge_analysis  \
+-w ~/scratch/case_study/dge_analysis \
+-profile rnaseq,docker
+
+
 # DESeq2 + GSEA, gProfiler2, and Shiny App
 ./nextflow run nf-core/differentialabundance \
 --input ~/HuntingtonNextflow/Data/differentialabundance/metadata.csv \

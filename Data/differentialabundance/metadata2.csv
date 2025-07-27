@@ -1,11 +1,11 @@
 sample,fastq_1,fastq_2,treatment,condition,replicate
-SRX25004080,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004070_SRR29493488_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004070_SRR29493488_2.fastq.gz,HTT-KO,mutant,1
-SRX25004078,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004072_SRR29493486_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004072_SRR29493486_2.fastq.gz,HTT-KO,mutant,3
-SRX25004077,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004073_SRR29493485_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004073_SRR29493485_2.fastq.gz,HTT-KO,mutant,4
-SRX25004076,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004074_SRR29493484_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004074_SRR29493484_2.fastq.gz,"HTT mutation\, 109CAG",mutant,1
-SRX25004075,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004075_SRR29493483_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004075_SRR29493483_2.fastq.gz,"HTT mutation\, 109CAG",mutant,2
-SRX25004074,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004076_SRR29493482_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004076_SRR29493482_2.fastq.gz,"HTT mutation\, 109CAG",mutant,3
-SRX25004073,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004077_SRR29493481_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004077_SRR29493481_2.fastq.gz,"HTT mutation\, 109CAG",mutant,4
+SRX25004080,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004070_SRR29493488_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004070_SRR29493488_2.fastq.gz,HTT_KO,HTT_KO,1
+SRX25004078,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004072_SRR29493486_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004072_SRR29493486_2.fastq.gz,HTT_KO,HTT_KO,3
+SRX25004077,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004073_SRR29493485_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004073_SRR29493485_2.fastq.gz,HTT_KO,HTT_KO,4
+SRX25004076,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004074_SRR29493484_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004074_SRR29493484_2.fastq.gz,HD,HD,1
+SRX25004075,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004075_SRR29493483_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004075_SRR29493483_2.fastq.gz,HD,HD,2
+SRX25004074,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004076_SRR29493482_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004076_SRR29493482_2.fastq.gz,HD,HD,3
+SRX25004073,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004077_SRR29493481_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004077_SRR29493481_2.fastq.gz,HD,HD,4
 SRX25004072,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004078_SRR29493480_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004078_SRR29493480_2.fastq.gz,control,control,1
 SRX25004071,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004080_SRR29493478_1.fastq.gz,/home/user/cloud/GSE270472/fetchngs/fastq/SRX25004080_SRR29493478_2.fastq.gz,control,control,2
 SRX25004070,,,control,control,3

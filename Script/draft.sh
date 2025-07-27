@@ -113,8 +113,8 @@ source ~/.bashrc
 ./nextflow run nf-core/differentialabundance \
 --input ./Data/differentialabundance/metadata2.csv \
 --contrasts ./Data/differentialabundance/contrasts.csv \
---matrix ./Data/differentialabundance/salmon.merged.gene_counts.fixed.tsv \
---transcript_length_matrix ./Data/differentialabundance/salmon.merged.gene_lengths.tsv \
+--matrix ./Data/differentialabundance/salmon.merged.gene_counts.fixed.with_ensembl.tsv\
+--transcript_length_matrix ./Data/differentialabundance/salmon.merged.gene_lengths.tsv  \
 --gtf ./Data/Reference_genome.gtf.gz \ 
 --deseq2_cores 4 \
 --max_cpus 8 --max_memory 8.GB \
@@ -125,26 +125,26 @@ source ~/.bashrc
 
 # DESeq2 + GSEA, gProfiler2, and Shiny App
 ./nextflow run nf-core/differentialabundance \
---input ~/HuntingtonNextflow/Data/differentialabundance/metadata.csv \
---contrasts ~/HuntingtonNextflow/Data/differentialabundance/contrasts.csv \
---matrix ~/HuntingtonNextflow/Data/NCBI_DATA/GSE270472_raw_counts_GRCh38.p13_NCBI.tsv.gz \
---transcript_length_matrix ~/HuntingtonNextflow/Data/differentialabundance/transcript_length.csv \
---gtf ~/HuntingtonNextflow/Data/Reference_genome.gtf.gz \
---filtering_min_proportion 0.3 \        
---filtering_grouping_var condition \    
+# --input ~/HuntingtonNextflow/Data/differentialabundance/metadata.csv \
+# --contrasts ~/HuntingtonNextflow/Data/differentialabundance/contrasts.csv \
+# --matrix ~/HuntingtonNextflow/Data/NCBI_DATA/GSE270472_raw_counts_GRCh38.p13_NCBI.tsv.gz \
+# --transcript_length_matrix ~/HuntingtonNextflow/Data/differentialabundance/transcript_length.csv \
+# --gtf ~/HuntingtonNextflow/Data/Reference_genome.gtf.gz \
+--filtering_min_proportion 0.3 \
+--filtering_grouping_var condition \
 --deseq2_cores 4 \
 --gsea_run true \
---gsea_permute gene_set \               
---gene_sets_files ["two file paths"]   
+--gsea_permute gene_set \
+--gene_sets_files ~/HuntingtonNextflow/c2.all.v2025.1.Hs.json \
 --gprofiler2_run true \
---gprofiler2_organism hsapiens \    
---gprofiler2_sources '["GO", "KEGG", "REAC"]' \      
---gprofiler2_correction_method gSCS \   
+--gprofiler2_organism hsapiens \
+--gprofiler2_sources "GO,GO:MF,GO:BP,GO:CC,KEGG,REAC" \
+--gprofiler2_correction_method gSCS \
 --shinyngs_build_app true \
 --max_cpus 8 --max_memory 8.GB \
---outdir ~/scratch/lab_3/dge_analysis_filtered \
--w ~/scratch/work/lab_3/dge_analysis \
--profile docker 
+--outdir ~/HuntingtonNextflow/dge_analysis_filtered \
+-w ~/HuntingtonNextflow/work/dge_analysis \
+-profile docker
 
 # NOTE
 # Filter out genes that are not expressed in at least 30% of samples => prevent noise from genes that are rarely expressed

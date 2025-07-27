@@ -116,7 +116,6 @@ source ~/.bashrc
 --matrix ./Data/differentialabundance/salmon.merged.gene_counts.fixed.tsv \
 --transcript_length_matrix ./Data/differentialabundance/salmon.merged.gene_lengths.tsv \
 --gtf ./Data/Reference_genome.gtf.gz \ 
-# change to Reference_genome.fixed.gtf.gz
 --deseq2_cores 4 \
 --max_cpus 8 --max_memory 8.GB \
 --outdir ~/scratch/case_study/dge_analysis  \

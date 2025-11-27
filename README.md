@@ -1,6 +1,6 @@
 # HuntingtonNextflow
-
-
+This study investigates early transcriptional dysregulation resulting from loss or mutation of the HTT gene, the causative factor in Huntington disease (HD). \
+Using RNA-seq data from iPSC-derived neurons representing wild-type, HTT knockout (HTT-KO), and HD mutant conditions, we performed differential gene expression and pathway enrichment analyses. Both HTT-KO and HD models exhibited significant upregulation of genes involved in neural development, inflammation, and extracellular matrix remodeling, with shared overexpression of PAX3 and BGN. Gene Ontology and GSEA revealed overlapping enrichment in structural and cancer-related pathways, though HTT-KO showed more pronounced alterations. 
 
 Sample groups are shown in SraRunTable.csv and GSE270472_HD_KO_NSC.xlsx:
 - Control (IC1):                    nH105IC1, nH105IC2, nH105IC3, nH105IC4
